@@ -1,4 +1,4 @@
-name:                machine0
+name:                EDFA
 version:             0.1.0.0
 github:              "narumij/machine0"
 license:             BSD3
@@ -34,7 +34,7 @@ executables:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - machine0
+    - EDFA
 
 tests:
   machine0-test:
@@ -45,4 +45,4 @@ tests:
     - -rtsopts
     - -with-rtsopts=-N
     dependencies:
-    - machine0
+    - EDFA
