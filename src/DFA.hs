@@ -6,9 +6,9 @@ module DFA (
   Edge(..),
   ) where
 
-data Moves input stateObject
-  = Input [(input,stateObject)]
-  | Eplision stateObject
+data Moves input state
+  = Input [(input,state)]
+  | Eplision state
   deriving (Eq,Show)
 
 data State state
@@ -17,12 +17,12 @@ data State state
   | Start
   deriving (Eq, Show)
 
-data Base stateObject edges
+data Base state edges
   = From {
-      state :: stateObject,
+      state :: state,
       edges :: edges
       }
-  | To stateObject
+  | To state
   deriving (Eq, Show)
 
 type Edge state input = Moves input (State state)
