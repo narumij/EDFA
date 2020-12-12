@@ -4,9 +4,9 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: edd404a737775399e7c80e28698cd4120fdc5cff30f368b06933560a76aa930e
+-- hash: 7359faff853b463be403867c495fce82a332c45d7f03d0f6947bb776c17abd2b
 
-name:           machine0
+name:           EDFA
 version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/narumij/machine0#readme>
 homepage:       https://github.com/narumij/machine0#readme
@@ -32,7 +32,7 @@ library
       DFA.B
       Lib
   other-modules:
-      Paths_machine0
+      Paths_EDFA
   hs-source-dirs:
       src
   build-depends:
@@ -42,24 +42,24 @@ library
 executable machine0-exe
   main-is: Main.hs
   other-modules:
-      Paths_machine0
+      Paths_EDFA
   hs-source-dirs:
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
-    , machine0
+      EDFA
+    , base >=4.7 && <5
   default-language: Haskell2010
 
 test-suite machine0-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
-      Paths_machine0
+      Paths_EDFA
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
-    , machine0
+      EDFA
+    , base >=4.7 && <5
   default-language: Haskell2010

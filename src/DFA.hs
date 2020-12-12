@@ -1,30 +1,29 @@
 module DFA (
   State(..),
   Moves(..),
-  Base(..),
-  Node(..),
+  Graph'(..),
+  Graph(..),
   Edge(..),
   ) where
 
-data Moves input stateObject
-  = Input [(input,stateObject)]
-  | Eplision stateObject
+data Moves input state
+  = Input [(input,state)]
+  | Eplision state
   deriving (Eq,Show)
 
-data State state
+newtype State state
   = State state
-  | Final
-  | Start
   deriving (Eq, Show)
 
-data Base stateObject edges
-  = From {
-      state :: stateObject,
+data Graph' state edges
+  = Node {
+      state :: state,
       edges :: edges
       }
-  | To stateObject
+  | Leaf state
   deriving (Eq, Show)
 
 type Edge state input = Moves input (State state)
-type Node state input = Base (State state) (Edge state input)
+
+type Graph state input = Graph' (State state) (Edge state input)
 
