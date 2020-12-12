@@ -1,8 +1,8 @@
 module DFA.B (
-  Node(..),
+  Graph(..),
   Moves(..),
   SelectEpsilon(..),
-  aToB,
+  fromB,
   ) where
 
 import qualified DFA
@@ -17,22 +17,24 @@ data Moves input epsilon' state
 type Edge state state' input epsilon'
   = Moves input epsilon' (A.State state state')
 
-type Node state state' input epsilon'
-  = DFA.Base (A.State state state') (Edge state state' input epsilon')
+type Graph state state' input epsilon'
+  = DFA.Graph' (A.State state state') (Edge state state' input epsilon')
 
 type SelectEpsilon epsilon'
   = epsilon' -> Bool
 
-aToB :: SelectEpsilon epsilon'
-    -> [Node state state' input epsilon']
-    -> Maybe [A.Node state state' input]
-aToB f = mapM (aToB' f)
+fromB :: SelectEpsilon epsilon'
+    -> [Graph state state' input epsilon']
+    -> Maybe [A.Graph state state' input]
+fromB f = mapM (aToB' f)
+
+-- AとBを入れ替える前の名残が残っている
 
 aToB' :: SelectEpsilon epsilon'
-    -> Node state state' input epsilon'
-    -> Maybe (A.Node state state' input)
-aToB' f n@(DFA.From s ee) = fmap (DFA.From s) (edges f ee)
-aToB' _   (DFA.To s)      = Just (DFA.To s)
+    -> Graph state state' input epsilon'
+    -> Maybe (A.Graph state state' input)
+aToB' f n@(DFA.Node s ee) = fmap (DFA.Node s) (edges f ee)
+aToB' _   (DFA.Leaf s)    = Just (DFA.Leaf s)
 
 edges :: SelectEpsilon epsilon'
     -> Moves input epsilon' node
