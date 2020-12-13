@@ -26,19 +26,17 @@ type SelectEpsilon epsilon'
 fromB :: SelectEpsilon epsilon'
     -> [Graph state state' input epsilon']
     -> Maybe [A.Graph state state' input]
-fromB f = mapM (aToB' f)
+fromB f = mapM (graph f)
 
--- AとBを入れ替える前の名残が残っている
-
-aToB' :: SelectEpsilon epsilon'
+graph :: SelectEpsilon epsilon'
     -> Graph state state' input epsilon'
     -> Maybe (A.Graph state state' input)
-aToB' f n@(DFA.Node s ee) = fmap (DFA.Node s) (edges f ee)
-aToB' _   (DFA.Leaf s)    = Just (DFA.Leaf s)
+graph f (DFA.Node s ee) = fmap (DFA.Node s) (edges f ee)
+graph _ (DFA.Leaf s)    = Just (DFA.Leaf s)
 
 edges :: SelectEpsilon epsilon'
     -> Moves input epsilon' node
-    -> Maybe (DFA.Moves input node)
+    -> Maybe (DFA.Move input node)
 edges _ (Input   ii)                      = Just (DFA.Input ii)
 edges _ (Epsilon  e)                      = Just (DFA.Eplision e)
 edges f (Epsilon' en) | hasEpsilon' f en  = Just (DFA.Eplision (epsilon' f en))

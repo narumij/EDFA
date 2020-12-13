@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7359faff853b463be403867c495fce82a332c45d7f03d0f6947bb776c17abd2b
+-- hash: 174cc310d20cad476ba0d39db500300bd7005eed9d424d3873fa5a0cf06fe576
 
 name:           EDFA
 version:        0.1.0.0
@@ -55,6 +55,9 @@ test-suite machine0-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      DFAASpec
+      DFABSpec
+      DFASpec
       Paths_EDFA
   hs-source-dirs:
       test
@@ -62,4 +65,5 @@ test-suite machine0-test
   build-depends:
       EDFA
     , base >=4.7 && <5
+    , hspec
   default-language: Haskell2010
