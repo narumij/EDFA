@@ -5,6 +5,7 @@ module DFA (
   Graph(..),
   Edges(..),
   state,
+  stateContents,
   edges,
   ) where
 
@@ -13,8 +14,8 @@ data Move input state
   | Eplision state
   deriving (Eq,Show)
 
-newtype State state
-  = State state
+newtype State stateContents
+  = State stateContents
   deriving (Eq, Show)
 
 data Graph' state edges
@@ -33,3 +34,9 @@ edges :: Graph' state edges -> Maybe edges
 edges (Node _ e) = Just e
 edges (Leaf _) = Nothing
 
+-- stateContents :: Graph' (State stateContents) e -> stateContents
+-- stateContents (Node (State s) _) = s
+-- stateContents (Leaf (State s)  ) = s
+
+stateContents :: State stateContents -> stateContents
+stateContents (State s) = s
