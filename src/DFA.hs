@@ -1,5 +1,4 @@
 module DFA (
---  State(..),
   Move(..),
   Graph'(..),
   Graph(..),
@@ -18,8 +17,11 @@ data Graph' state edges
   | Leaf state
   deriving (Eq, Show)
 
-type Edges state input = Move input state
-type Graph state input = Graph' state (Edges state input)
+type Edges state input
+  = Move input state
+
+type Graph state input
+  = Graph' state (Edges state input)
 
 state :: Graph' state edges -> state
 state (Node s _) = s
