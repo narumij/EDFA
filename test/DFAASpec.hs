@@ -2,7 +2,7 @@ module DFAASpec where
 
 import Test.Hspec
 
-import DFA(Graph(..),Graph'(..),State(..),Move(..))
+import DFA(Graph(..),Graph'(..),Move(..))
 import DFA.A(fromA)
 
 --import qualified DFA
@@ -16,11 +16,11 @@ a = [
   Node (A.State' "?") (Eplision (A.State' "??"))
   ]
 
-f :: String -> Maybe (DFA.State String)
-f = (`lookup` [("?",State "A"),("??",State "B"),("???",State "C")])
+f :: String -> Maybe String
+f = (`lookup` [("?", "A"),("??", "B"),("???", "C")])
 
-f' :: String -> Maybe (DFA.State String)
-f' = (`lookup` [("?",State "A"),("??",State "B")])
+f' :: String -> Maybe String
+f' = (`lookup` [("?", "A"),("??", "B")])
 
 spec :: Spec
 spec = do
@@ -31,9 +31,9 @@ spec = do
       fromA f a
         `shouldBe`
         (Just [
-          Leaf (State "A"),
-          Node (State "A") (Input [("i0",State "B"),("i1",State "C")]),
-          Node (State "A") (Eplision (State "B"))
+          Leaf "A",
+          Node "A" (Input [("i0", "B"),("i1", "C")]),
+          Node "A" (Eplision "B")
           ] :: Maybe [Graph String String])
 
     it "TODO: write here" $ do
